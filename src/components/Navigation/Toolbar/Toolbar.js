@@ -6,7 +6,9 @@ import Hamburger from "../Hamburger/Hamburger";
 
 const Toolbar = props => (
   <header className={classes.Toolbar}>
-    <Hamburger clicked={props.hamburgerClicked}></Hamburger>
+    <div className={classes.MobileOnly}>
+      <Hamburger clicked={props.hamburgerClicked} />
+    </div>
     <div className={classes.Logo}>
       <Logo />
     </div>

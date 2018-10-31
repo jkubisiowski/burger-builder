@@ -18,10 +18,10 @@
   padding: 6x 10px;
   display: block;
   width: 100px;
+  box-sizing: border-box;
 }
 
 .InputElement:focus {
   outline: none;
   background-color: #ccc;
-
 }

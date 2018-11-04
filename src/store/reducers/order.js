@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
       const newOrder = {
         ...action.orderData,
         id: action.orderId
-      }
+      };
       return {
         ...state,
         loading: false,
@@ -25,15 +25,33 @@ const reducer = (state = initialState, action) => {
         loading: false
       };
     case actionTypes.PURCHASE_BURGER_START:
-      return    {
+      return {
         ...state,
         loading: true
-      }
-      case actionTypes.PURCHASE_INIT:
-      return    {
+      };
+    case actionTypes.PURCHASE_INIT:
+      return {
         ...state,
         purchased: false
-      }
+      };
+
+    case actionTypes.FETCH_ORDERS_START:
+      return {
+        ...state,
+        loading: true
+      };
+    case actionTypes.FETCH_ORDERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        orders: action.orders
+      };
+    case actionTypes.FETCH_ORDERS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
     default:
       return state;
   }

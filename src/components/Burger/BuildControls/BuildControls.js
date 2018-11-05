@@ -9,7 +9,7 @@ const controls = [
   { label: "Meat", type: "meat" }
 ];
 
-const BuildControls = props => { 
+const BuildControls = props => {
   return (
     <div className={classes.BuildControls}>
       <p>Current price: <strong>${props.price.toFixed(2)}</strong></p>
@@ -19,10 +19,10 @@ const BuildControls = props => {
           removed={() => props.ingredientRemoved(x.type)}
           key={x.label}
           label={x.label}
-          disabled={props.disabled[x.type]}          
+          disabled={props.disabled[x.type]}
         />
       ))}
-      <button className={classes.OrderButton} disabled={!props.purchasable} onClick={props.ordered}>Order now</button>
+      <button className={classes.OrderButton} disabled={!props.purchasable} onClick={props.ordered}>{props.isAuthenticated ? 'ORDER NOW' : 'Sign in to order'}</button>
     </div>
   );
 };

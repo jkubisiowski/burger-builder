@@ -36,6 +36,13 @@ export const checkAuthTimeout = expirationTime => {
   }
 }
 
+export const setAuthRedirectPath = path => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path
+  }
+}
+
 export const auth = (email, password, isSignUp) => {
   return dispatch => {
     let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDO4C-yLJgH6ty-EJtxhOpV0eL7l_HyKQY";

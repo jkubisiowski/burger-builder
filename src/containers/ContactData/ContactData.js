@@ -5,8 +5,8 @@ import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Input from "./../../components/UI/Input/Input";
 import { connect } from "react-redux";
-import WithErrorHandler from '../../components/UI/WithErrorHandler/WithErrorHandler';
-import * as actions from '../../store/actions/index';
+import WithErrorHandler from "../../components/UI/WithErrorHandler/WithErrorHandler";
+import * as actions from "../../store/actions/index";
 
 class ContactData extends Component {
   state = {
@@ -93,7 +93,6 @@ class ContactData extends Component {
   };
 
   orderHandler = () => {
-
     const formData = {};
     for (let formElementId in this.state.orderForm) {
       formData[formElementId] = this.state.orderForm[formElementId].value;
@@ -106,7 +105,7 @@ class ContactData extends Component {
       userId: this.props.userId
     };
 
-    this.props.onOrderBurger(order, this.props.token)
+    this.props.onOrderBurger(order, this.props.token);
   };
 
   checkValidity(value, rules) {
@@ -122,6 +121,17 @@ class ContactData extends Component {
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
     }
+
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
+    }
+
     return isValid;
   }
 
@@ -202,7 +212,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithErrorHandler(ContactData, axios));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithErrorHandler(ContactData, axios));
